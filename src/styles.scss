@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Share:700i&display=swap');
+
+@font-face {
+  font-family: 'lemon';
+  src: url("assets/font/lemon.ttf") format("truetype");
+}
+
+body {
+  background-color: #ECF0F1;
+  color: #888888;
+  font-family: 'Open Sans', sans-serif;
+}

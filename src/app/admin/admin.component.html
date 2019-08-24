@@ -1,0 +1,11 @@
+<div class="header">
+  <img src="assets/images/operation_x_logo_white.svg" width="150"/>
+</div>
+<ul class="menu">
+  <li *ngFor="let menu of listMenu"><a href="javascript:void(0)"
+                                       class="{{( menu.active ) ? 'active' : ''}}"
+                                       (click)="menuActive(menu)">{{ menu.name }}</a></li>
+</ul>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

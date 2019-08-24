@@ -1,0 +1,40 @@
+.header {
+  background-color: #3498db;
+  height: 80px;
+  display: block;
+  color: #fff;
+  padding: 0 10px;
+}
+
+ul.menu {
+  background-color: #fff;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  li {
+    float: left;
+
+    a {
+      display: block;
+      color: #B5B5B5;
+      text-align: center;
+      padding: 5px 15px;
+      text-decoration: none;
+      //font-family: 'lemon', serif;
+      font-family: 'Share', cursive;
+      //font-size: 30px;
+      font-size: 20px;
+    }
+
+    a.active {
+      color: #3498DB;
+      border-bottom: 2px solid #3498DB;
+    }
+  }
+}
+
+.content {
+  padding: 10px;
+}
