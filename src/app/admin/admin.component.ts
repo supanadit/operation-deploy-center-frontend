@@ -11,6 +11,7 @@ export class AdminComponent implements OnInit {
     {name: 'Home', active: true, activeState: 'home', url: 'home'},
     {name: 'Server', active: false, activeState: 'server', url: 'server'},
     {name: 'Repository', active: false, activeState: 'repository'},
+    {name: 'Script', active: false, activeState: 'script'},
     {name: 'Deploy', active: false, activeState: 'deploy'},
   ];
 
