@@ -10,9 +10,9 @@ export class AdminComponent implements OnInit {
   listMenu: Menu[] = [
     {name: 'Home', active: true, activeState: 'home', url: 'home'},
     {name: 'Server', active: false, activeState: 'server', url: 'server'},
-    {name: 'Repository', active: false, activeState: 'repository'},
-    {name: 'Script', active: false, activeState: 'script'},
-    {name: 'Deploy', active: false, activeState: 'deploy'},
+    {name: 'Repository', active: false, activeState: 'repository', url: 'repository'},
+    {name: 'Script', active: false, activeState: 'script', url: 'script'},
+    {name: 'Deploy', active: false, activeState: 'deploy', url: 'deploy'},
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {

@@ -1,0 +1,49 @@
+.deploy-content {
+  padding-top: 35px;
+}
+
+.panel-deploy {
+  height: 370px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  color: #2c3e50;
+  padding: 0 10px;
+
+  .panel:first-child {
+    margin: 0;
+  }
+}
+
+.panel-deploy-black {
+  background-color: #34495e;
+  padding: 10px;
+  height: 370px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      color: #fff;
+    }
+
+    li::before {
+      content: '> ';
+    }
+  }
+
+  .message {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    .nothing {
+      margin: 0;
+      color: #bdc3c7;
+    }
+  }
+}

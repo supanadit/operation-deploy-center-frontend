@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="deploy-content">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel-deploy">
+          <div class="panel">
+            <div class="row">
+              <div class="col-md-6">
+                <b>Beton Frontend</b>
+              </div>
+              <div class="col-md-6">
+                <div style="float: right;">
+                  <span class="badge badge-pill badge-success">Running</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="row">
+              <div class="col-md-6">
+                <b>Beton Backend</b>
+              </div>
+              <div class="col-md-6">
+                <div style="float: right;">
+                  <span class="badge badge-pill badge-danger">Stopped</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="panel-deploy-black">
+          <ul>
+            <li>Cloning Repository</li>
+            <li>Doing NPM Install</li>
+            <li>Building Angular App</li>
+          </ul>
+          <div class="message" *ngIf="false">
+            <h3 class="nothing">No Operation</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
