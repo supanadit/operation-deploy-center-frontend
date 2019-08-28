@@ -11,8 +11,8 @@ export class AdminComponent implements OnInit {
     {name: 'Home', active: true, activeState: 'home', url: 'home'},
     {name: 'Server', active: false, activeState: 'server', url: 'server'},
     {name: 'Repository', active: false, activeState: 'repository', url: 'repository'},
-    {name: 'Script', active: false, activeState: 'script', url: 'script'},
-    {name: 'Deploy', active: false, activeState: 'deploy', url: 'deploy'},
+    // {name: 'Script', active: false, activeState: 'script', url: 'script'},
+    {name: 'Operation', active: false, activeState: 'operation', url: 'operation'},
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {

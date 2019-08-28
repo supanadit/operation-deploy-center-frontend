@@ -3,47 +3,49 @@
   <h3>
     List Server
     <div style="float: right;">
-      <button class="btn btn-primary">Create</button>
+      <button class="btn btn-primary"
+              (click)="toggleEditorCreate()">{{ !isEditorCreate ? 'New Connection' : 'Cancel' }}</button>
     </div>
   </h3>
   <br/>
 </div>
 <div class="container">
-  <div class="panel">
-    <h4>My Server</h4>
-    <table>
-      <tr>
-        <th>Host</th>
-        <td>:</td>
-        <td>153.92.4.32</td>
-      </tr>
-      <tr>
-        <th>Username&nbsp;&nbsp;</th>
-        <td>:</td>
-        <td>root</td>
-      </tr>
-    </table>
+  <p align="center" *ngIf="sshList.length == 0">
+    No server exist
+    <br/>
+    Add new connection
+  </p>
+  <div *ngIf="sshList.length != 0 && !isEditorCreate">
+    <div class="panel" *ngFor="let x of sshList;" (click)="toggleEditorCreate(x)">
+      <h4>{{ x.host }}</h4>
+      <table>
+        <tr>
+          <th>Username&nbsp;&nbsp;</th>
+          <td>:</td>
+          <td>{{ x.username }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
-<div class="container" *ngIf="false">
+<div class="container" *ngIf="isEditorCreate">
   <div class="row">
     <div class="col-md-12">
       Host
-      <input type="text" class="form-control"/>
+      <input type="text" class="form-control" [(ngModel)]="currentEditSSH.host"/>
     </div>
   </div>
   <br/>
   <div class="row">
     <div class="col-md-6">
       Username
-      <input type="text" class="form-control"/>
+      <input type="text" class="form-control" [(ngModel)]="currentEditSSH.username"/>
     </div>
     <div class="col-md-6">
       Password
-      <input type="text" class="form-control"/>
+      <input type="text" class="form-control" [(ngModel)]="currentEditSSH.password"/>
     </div>
   </div>
   <br/>
-  <button class="btn btn-primary">Save</button>&nbsp;
-  <button class="btn btn-danger">Back</button>
+  <button class="btn btn-primary" (click)="saveSSH(currentEditSSH)">Save</button>&nbsp;
 </div>

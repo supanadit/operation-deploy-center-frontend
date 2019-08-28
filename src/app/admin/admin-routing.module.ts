@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ServerComponent } from './pages/server/server.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
 import { ScriptComponent } from './pages/script/script.component';
-import { DeployComponent } from './pages/deploy/deploy.component';
+import { OperationComponent } from './pages/operation/operation.component';
 
 
 const routes: Routes = [{
@@ -41,10 +41,10 @@ const routes: Routes = [{
       }
     },
     {
-      path: 'deploy',
-      component: DeployComponent,
+      path: 'operation',
+      component: OperationComponent,
       data: {
-        activeState: 'deploy',
+        activeState: 'operation',
       }
     },
     {

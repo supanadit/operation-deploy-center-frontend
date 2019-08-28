@@ -12,35 +12,42 @@
     z-index: 1000;
   }
 
-  ul.menu {
-    background-color: #fff;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  .container-menu {
     overflow: hidden;
     -webkit-box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 1px 5px -1px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 
-    li {
-      float: left;
+    ul.menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
 
-      a {
-        display: block;
-        color: #B5B5B5;
-        text-align: center;
-        padding: 5px 15px;
-        text-decoration: none;
-        //font-family: 'lemon', serif;
-        font-family: 'Share', cursive;
-        //font-size: 30px;
-        font-size: 20px;
+      li {
+        float: left;
+
+        a {
+          display: block;
+          color: #B5B5B5;
+          text-align: center;
+          padding: 5px 15px;
+          text-decoration: none;
+          //font-family: 'lemon', serif;
+          font-family: 'Share', cursive;
+          //font-size: 30px;
+          font-size: 20px;
+        }
+
+        a.active {
+          color: #3498DB;
+          border-bottom: 2px solid #3498DB;
+        }
       }
+    }
 
-      a.active {
-        color: #3498DB;
-        border-bottom: 2px solid #3498DB;
-      }
+    .optional-component {
+      float: right;
     }
   }
 }
