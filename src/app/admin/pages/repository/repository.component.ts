@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RealtimeService } from '../../../services/realtime.service';
 
 @Component({
   selector: 'app-repository',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepositoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private realtimeService: RealtimeService) {
+  }
 
   ngOnInit() {
+    this.realtimeService.sendMessage('Hello');
   }
 
 }

@@ -11,7 +11,15 @@ import { OperationComponent } from './pages/operation/operation.component';
 import { ServerService } from '../services/server.service';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { environment } from '../../environments/environment';
+import { RealtimeService } from '../services/realtime.service';
 
+const config: SocketIoConfig = {
+  url: environment.api_engine, options: {
+    cors: '*:*',
+  }
+};
 
 @NgModule({
   declarations: [
@@ -26,10 +34,12 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AdminRoutingModule,
     FormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     HttpClient,
     ServerService,
+    RealtimeService,
   ]
 })
 export class AdminModule {

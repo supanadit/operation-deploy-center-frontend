@@ -13,7 +13,7 @@ export class ServerComponent implements OnInit {
     host: '',
     password: '',
     username: '',
-    port: '',
+    port: '22',
   });
   sshList: SSHResponse[] = [];
   currentEditSSH: SSHResponse = this.defaultSSH;
