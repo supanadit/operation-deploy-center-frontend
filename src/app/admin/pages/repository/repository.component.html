@@ -3,47 +3,45 @@
   <h3>
     List Repository
     <div style="float: right;">
-      <button class="btn btn-primary">Add</button>
+      <button class="btn btn-primary" (click)="toggleEditorCreate()">{{ !isEditorCreate ? 'Add' : 'Cancel' }}</button>
     </div>
   </h3>
   <br/>
 </div>
-<div class="container">
-  <div class="panel">
-    <h4>Beton Trackgo</h4>
+<div class="container" *ngIf="!isEditorCreate">
+  <p align="center" *ngIf="listRepository.length == 0">
+    No repository exist
+    <br/>
+    Add new one
+  </p>
+  <div class="panel" *ngFor="let x of listRepository" (click)="toggleEditorCreate(x)">
+    <h4>{{ x.getCleanProjectName() }}</h4>
     <table>
       <tr>
-        <th>Host</th>
-        <td>:</td>
-        <td>153.92.4.32</td>
+        <th>URL</th>
+        <td>:&nbsp;&nbsp;</td>
+        <td>{{ x.originalURL }}</td>
       </tr>
       <tr>
-        <th>Username&nbsp;&nbsp;</th>
+        <th>Url Type&nbsp;&nbsp;</th>
         <td>:</td>
-        <td>root</td>
+        <td>{{ x.urlType }}</td>
+      </tr>
+      <tr>
+        <th>Cloned&nbsp;&nbsp;</th>
+        <td>:</td>
+        <td>{{ x.cloned ? "Yes" : "No" }}</td>
       </tr>
     </table>
   </div>
 </div>
-<div class="container" *ngIf="false">
+<div class="container" *ngIf="isEditorCreate">
   <div class="row">
     <div class="col-md-12">
-      Host
-      <input type="text" class="form-control"/>
+      URL
+      <input type="text" class="form-control" [(ngModel)]="currentEditGit.url"/>
     </div>
   </div>
   <br/>
-  <div class="row">
-    <div class="col-md-6">
-      Username
-      <input type="text" class="form-control"/>
-    </div>
-    <div class="col-md-6">
-      Password
-      <input type="text" class="form-control"/>
-    </div>
-  </div>
-  <br/>
-  <button class="btn btn-primary">Save</button>&nbsp;
-  <button class="btn btn-danger">Back</button>
+  <button class="btn btn-primary" (click)="gitSave(currentEditGit)">Save</button>&nbsp;
 </div>

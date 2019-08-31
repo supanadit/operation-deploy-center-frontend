@@ -49,7 +49,7 @@ export class ServerComponent implements OnInit {
 
   saveSSH(ssh: SSHResponse) {
     if (!ssh.isEmpty()) {
-      this.serverService.save(ssh).subscribe((data: DefaultResponse<any>) => {
+      this.serverService.sshSave(ssh).subscribe((data: DefaultResponse<any>) => {
         this.loadSSH();
         this.toggleEditorCreate();
       }, error => {
