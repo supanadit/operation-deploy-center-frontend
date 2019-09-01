@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RealtimeService } from '../../../services/realtime.service';
-import { GitResponse, GitResponseInterface } from '../../../model/git.response';
+import { GitResponse } from '../../../model/git.response';
 import { RepositoryService } from '../../../services/repository.service';
 import { DefaultResponse } from '../../../model/default.response';
-import { SSHResponse } from '../../../model/ssh.response';
 
 @Component({
   selector: 'app-repository',
@@ -25,7 +24,6 @@ export class RepositoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.realtimeService.sendMessage('Hello');
     this.loadGit();
   }
 

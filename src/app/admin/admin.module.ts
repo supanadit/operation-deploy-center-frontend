@@ -15,6 +15,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { environment } from '../../environments/environment';
 import { RealtimeService } from '../services/realtime.service';
 import { RepositoryService } from '../services/repository.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const config: SocketIoConfig = {
   url: environment.api_engine, options: {
@@ -35,14 +36,19 @@ const config: SocketIoConfig = {
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    NgSelectModule,
+  ],
+  exports: [
+    NgSelectModule,
   ],
   providers: [
     HttpClient,
     ServerService,
     RealtimeService,
     RepositoryService,
-  ]
+  ],
 })
+
 export class AdminModule {
 }

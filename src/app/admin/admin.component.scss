@@ -1,7 +1,7 @@
 .sticking-header {
   position: fixed;
   width: 100%;
-  z-index: 10000;
+  z-index: 10;
 
   .header {
     background-color: #3498db;
@@ -9,7 +9,7 @@
     display: block;
     color: #fff;
     padding: 0 10px;
-    z-index: 1000;
+    z-index: 10;
   }
 
   .container-menu {

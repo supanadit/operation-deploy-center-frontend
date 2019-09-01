@@ -1,28 +1,21 @@
 <div class="container">
+  <div class="header-button">
+    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add">Add new operation</button>&nbsp;
+    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#clone">Clone Repository</button>
+  </div>
   <div class="deploy-content">
     <div class="row">
       <div class="col-md-4">
         <div class="panel-deploy">
-          <div class="panel">
+          <div class="panel" *ngFor="let x of listOperation;let i = index" (click)="selectOperation(x,i)">
             <div class="row">
               <div class="col-md-6">
-                <b>Beton Frontend</b>
+                <b>{{ x.operation }}</b>
               </div>
               <div class="col-md-6">
                 <div style="float: right;">
-                  <span class="badge badge-pill badge-success">Running</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel">
-            <div class="row">
-              <div class="col-md-6">
-                <b>Beton Backend</b>
-              </div>
-              <div class="col-md-6">
-                <div style="float: right;">
-                  <span class="badge badge-pill badge-danger">Stopped</span>
+                  <span class="badge badge-pill badge-success" *ngIf="x.running">Running</span>
+                  <span class="badge badge-pill badge-primary" *ngIf="!x.running">Finish</span>
                 </div>
               </div>
             </div>
@@ -31,16 +24,44 @@
       </div>
       <div class="col-md-8">
         <div class="panel-deploy-black">
-          <ul>
-            <li>> Cloning Repository</li>
-            <li>> Doing NPM Install</li>
-            <li>> Building Angular App</li>
-            <li>> Building Angular App Building Angular App Building Angular App Building Angular App Building Angular App Building Angular App</li>
+          <ul *ngIf="currentOperation != null">
+            <li *ngFor="let x of currentOperation.log">> {{ x.description }}</li>
           </ul>
-          <div class="message" *ngIf="false">
+          <div class="message" *ngIf="currentOperation == null">
             <h3 class="nothing">No Operation</h3>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addNewOperation" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewOperation">Add new Operation</h5>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="clone" tabindex="-1" role="dialog" aria-labelledby="cloneOperation" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cloneOperation">Clone Repository</h5>
+      </div>
+      <div class="modal-body">
+        <ng-select placeholder="Select Repository" [items]="listRepository" bindLabel="originalURL"></ng-select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Clone</button>
       </div>
     </div>
   </div>
