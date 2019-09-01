@@ -1,9 +1,10 @@
 <div class="container">
   <br/>
   <h3>
-    List Server
+    Server
     <div style="float: right;">
-      <button class="btn btn-primary" (click)="toggleEditorCreate()">{{ !isEditorCreate ? 'New Connection' : 'Cancel' }}</button>
+      <button class="btn btn-primary"
+              (click)="toggleEditorCreate()">{{ !isEditorCreate ? 'New Connection' : 'Cancel' }}</button>
     </div>
   </h3>
   <br/>
@@ -46,5 +47,14 @@
     </div>
   </div>
   <br/>
-  <button class="btn btn-primary" (click)="saveSSH(currentEditSSH)">Save</button>&nbsp;
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary" (click)="saveSSH(currentEditSSH)">Save</button>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="javascript:void(0)" (click)="deleteSSH(currentEditSSH)">Delete</a>
+    </div>
+  </div>
 </div>

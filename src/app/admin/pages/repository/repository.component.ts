@@ -12,7 +12,7 @@ import { OperationResponse } from '../../../model/operation.response';
 })
 export class RepositoryComponent implements OnInit {
   defaultGit: GitResponse = new GitResponse({
-    url: '',
+    url: null,
   });
   listRepository: GitResponse[] = [];
   isEditorCreate = false;

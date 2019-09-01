@@ -82,4 +82,18 @@ export class RepositoryService {
       })
     );
   }
+
+  gitUpdate(git: GitResponseInterface): Observable<DefaultResponse<any>> {
+    return this.http.post(`${environment.api_engine}/git/update`, {
+      url: git.url,
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
 }

@@ -58,4 +58,15 @@ export class ServerComponent implements OnInit {
     }
   }
 
+  deleteSSH(ssh: SSHResponse) {
+    if (!ssh.isEmpty()) {
+      this.serverService.sshDelete(ssh).subscribe((data: DefaultResponse<any>) => {
+        this.loadSSH();
+        this.toggleEditorCreate();
+      }, error => {
+        console.info('ERROR', error);
+      });
+    }
+  }
+
 }

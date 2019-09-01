@@ -40,4 +40,35 @@ export class ServerService {
       })
     );
   }
+
+  sshDelete(ssh: SSHResponse): Observable<DefaultResponse<any>> {
+    return this.http.post(`${environment.api_engine}/ssh/remove`, ssh, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
+
+  sshCheckDirectory(ssh: SSHResponse, targetDirectory: string = '/'): Observable<DefaultResponse<Array<string>>> {
+    const request = {
+      host: ssh.host,
+      username: ssh.username,
+      password: ssh.password,
+      port: ssh.port,
+      directory: targetDirectory,
+    };
+    return this.http.post(`${environment.api_engine}/ssh/check/directory`, request, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
 }
