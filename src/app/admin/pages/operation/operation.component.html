@@ -1,7 +1,19 @@
 <div class="container">
   <div class="header-button">
-    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add">Add new operation</button>&nbsp;
-    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#clone">Clone Repository</button>
+    <div class="row">
+      <div class="col-md-3">
+        <button class="btn btn-danger btn-sm" (click)="clearOperation()">Clear Operation</button>&nbsp;
+      </div>
+      <div class="col-md-9">
+        <div style="float:right">
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add">Add new operation</button>&nbsp;|&nbsp;
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#clone">Clone Repository</button>&nbsp;
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete">Delete Repository</button>&nbsp;
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#compress">Compress Repository
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="deploy-content">
     <div class="row">
@@ -57,11 +69,50 @@
         <h5 class="modal-title" id="cloneOperation">Clone Repository</h5>
       </div>
       <div class="modal-body">
-        <ng-select placeholder="Select Repository" [items]="listRepository" bindLabel="originalURL"></ng-select>
+        <ng-select placeholder="Select Repository" [items]="listRepository" bindLabel="originalURL"
+                   [(ngModel)]="gitClone">
+        </ng-select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Clone</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="clone()">Clone</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="deleteOperation" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteOperation">Delete Repository</h5>
+      </div>
+      <div class="modal-body">
+        <ng-select placeholder="Select Repository" [items]="listRepository" bindLabel="originalURL"
+                   [(ngModel)]="gitClone">
+        </ng-select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="compress" tabindex="-1" role="dialog" aria-labelledby="compressOperation"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="compressOperation">Compress Repository</h5>
+      </div>
+      <div class="modal-body">
+        <ng-select placeholder="Select Repository" [items]="listRepository" bindLabel="originalURL"
+                   [(ngModel)]="gitClone">
+        </ng-select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="compress()">Compress</button>
       </div>
     </div>
   </div>

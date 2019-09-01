@@ -12,6 +12,10 @@ export class RealtimeService {
   constructor(private socket: Socket) {
   }
 
+  clearOperation(): void {
+    this.socket.emit('clear-operation');
+  }
+
   getOperation(): Observable<OperationResponse[]> {
     this.socket.emit('get-operation');
     return this.socket.fromEvent<OperationResponse[]>('operation').pipe(

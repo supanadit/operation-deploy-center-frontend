@@ -3,6 +3,7 @@ import { RealtimeService } from '../../../services/realtime.service';
 import { GitResponse } from '../../../model/git.response';
 import { RepositoryService } from '../../../services/repository.service';
 import { DefaultResponse } from '../../../model/default.response';
+import { OperationResponse } from '../../../model/operation.response';
 
 @Component({
   selector: 'app-repository',
@@ -25,6 +26,9 @@ export class RepositoryComponent implements OnInit {
 
   ngOnInit() {
     this.loadGit();
+    this.realtimeService.getOperation().subscribe((data: OperationResponse[]) => {
+      this.loadGit();
+    });
   }
 
   toggleEditorCreate(gitResponseInterface: GitResponse = null): boolean {

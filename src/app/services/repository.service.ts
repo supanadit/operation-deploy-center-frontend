@@ -40,4 +40,46 @@ export class RepositoryService {
       })
     );
   }
+
+  gitClone(git: GitResponseInterface): Observable<DefaultResponse<any>> {
+    return this.http.post(`${environment.api_engine}/git/clone`, {
+      url: git.url,
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
+
+  gitRemove(git: GitResponseInterface): Observable<DefaultResponse<any>> {
+    return this.http.post(`${environment.api_engine}/git/remove`, {
+      url: git.url,
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
+
+  gitCompress(git: GitResponseInterface): Observable<DefaultResponse<any>> {
+    return this.http.post(`${environment.api_engine}/git/compress`, {
+      url: git.url,
+    }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
 }
