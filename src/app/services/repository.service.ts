@@ -96,4 +96,20 @@ export class RepositoryService {
       })
     );
   }
+
+  gitCheckDirectory(git: GitResponseInterface, targetDirectory: string = '/'): Observable<DefaultResponse<Array<string>>> {
+    const request = {
+      url: git.url,
+      directory: targetDirectory,
+    };
+    return this.http.post(`${environment.api_engine}/git/check/directory`, request, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }).pipe(
+      map((response: DefaultResponseInterface<any>) => {
+        return new DefaultResponse(response);
+      })
+    );
+  }
 }

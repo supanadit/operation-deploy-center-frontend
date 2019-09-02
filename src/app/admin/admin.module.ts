@@ -16,6 +16,7 @@ import { environment } from '../../environments/environment';
 import { RealtimeService } from '../services/realtime.service';
 import { RepositoryService } from '../services/repository.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { OperationService } from '../services/operation.service';
 
 const config: SocketIoConfig = {
   url: environment.api_engine, options: {
@@ -47,6 +48,7 @@ const config: SocketIoConfig = {
     ServerService,
     RealtimeService,
     RepositoryService,
+    OperationService,
   ],
 })
 

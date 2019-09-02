@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GitResponse, GitResponseInterface } from '../../../model/git.response';
 import { RealtimeService } from '../../../services/realtime.service';
 import { RepositoryService } from '../../../services/repository.service';
@@ -6,6 +6,8 @@ import { DefaultResponse } from '../../../model/default.response';
 import { OperationResponse } from '../../../model/operation.response';
 import { SSHResponse } from '../../../model/ssh.response';
 import { ServerService } from '../../../services/server.service';
+import { interval, Subscription } from 'rxjs';
+import { OperationService } from '../../../services/operation.service';
 
 declare var jQuery: any;
 
@@ -15,7 +17,7 @@ declare var jQuery: any;
   styleUrls: ['./operation.component.scss']
 })
 export class OperationComponent implements OnInit, OnDestroy {
-
+  subscription: Subscription;
   gitDefault: GitResponseInterface = {
     url: null,
   };
@@ -32,13 +34,20 @@ export class OperationComponent implements OnInit, OnDestroy {
   directoryCompress = '/';
 
   selectedSSHOperation: SSHResponse = null;
-  selectedRepositoryOperation: SSHResponse = null;
+  selectedRepositoryOperation: GitResponse = null;
   selectedOperationType: any = null;
+
+  directoryCompressListing = [];
+  directoryCompressListingProcess = false;
+  directoryCompressListingError = false;
+  directoryCompressListingErrorMessage = '';
+  directoryCompressListingFocus = false;
 
   directoryListing = [];
   directoryListingProcess = false;
   directoryListingError = false;
   directoryListingErrorMessage = '';
+  directoryListingFocus = false;
 
   operationTypeList = [
     {
@@ -55,6 +64,7 @@ export class OperationComponent implements OnInit, OnDestroy {
     private realtimeService: RealtimeService,
     private repositoryService: RepositoryService,
     private serverService: ServerService,
+    private operationService: OperationService,
   ) {
   }
 
@@ -75,6 +85,29 @@ export class OperationComponent implements OnInit, OnDestroy {
       this.listOperation = [];
       this.currentOperation = null;
     });
+    const source = interval(3500);
+    this.subscription = source.subscribe(val => {
+      if (!this.directoryCompressListingFocus) {
+        this.clearDirectoryCompress();
+      }
+      if (!this.directoryListingFocus) {
+        this.clearDirectoryListing();
+      }
+    });
+  }
+
+  clearDirectoryListing() {
+    this.directoryListing = [];
+    this.directoryListingProcess = false;
+    this.directoryListingError = false;
+    this.directoryListingErrorMessage = '';
+  }
+
+  clearDirectoryCompress() {
+    this.directoryCompressListing = [];
+    this.directoryCompressListingProcess = false;
+    this.directoryCompressListingError = false;
+    this.directoryCompressListingErrorMessage = '';
   }
 
   loadGit() {
@@ -162,12 +195,43 @@ export class OperationComponent implements OnInit, OnDestroy {
     }
   }
 
+  gitDirectoryCheck() {
+    if (this.selectedRepositoryOperation != null) {
+      this.directoryCompressListingProcess = true;
+      // tslint:disable-next-line:max-line-length
+      this.repositoryService.gitCheckDirectory(this.selectedRepositoryOperation, this.directoryCompress).subscribe((data: DefaultResponse<Array<string>>) => {
+        if (!data.success) {
+          this.directoryCompressListingError = true;
+          this.directoryCompressListingErrorMessage = data.message;
+        } else {
+          this.directoryCompressListingError = false;
+          this.directoryCompressListingErrorMessage = '';
+        }
+        this.directoryCompressListingProcess = false;
+        this.directoryCompressListing = data.data;
+      }, error => {
+        this.directoryCompressListing = [];
+        this.directoryCompressListingProcess = false;
+        this.directoryCompressListingError = true;
+      });
+    }
+  }
+
   serverChange() {
     console.log('Changed');
   }
 
+  startDeploy() {
+    // tslint:disable-next-line:max-line-length
+    this.operationService.standardDeploy(this.selectedRepositoryOperation, this.selectedSSHOperation, this.directoryTarget, this.directoryCompress).subscribe((data: any) => {
+      console.log('Success', data);
+    }, error => {
+      console.log('Error', error);
+    });
+  }
+
 
   ngOnDestroy(): void {
-    // this.realtimeService.de
+    this.subscription.unsubscribe();
   }
 }
