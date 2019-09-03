@@ -230,6 +230,17 @@ export class OperationComponent implements OnInit, OnDestroy {
     });
   }
 
+  confirmation() {
+    jQuery('#confirmation').modal({
+      backdrop: 'static',
+      show: true
+    });
+    jQuery('#add').modal('hide');
+  }
+
+  cancel() {
+    jQuery('#add').modal('show');
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
