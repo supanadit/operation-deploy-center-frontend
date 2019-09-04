@@ -12,13 +12,13 @@ const routes: Routes = [{
       path: 'admin',
       loadChildren: './admin/admin.module#AdminModule'
     },
-    {
-      path: 'home',
-      component: HomeComponent,
-    },
+    // {
+    //   path: 'home',
+    //   component: HomeComponent,
+    // },
     {
       path: '',
-      redirectTo: 'home',
+      redirectTo: 'admin',
       pathMatch: 'full',
     },
   ]
