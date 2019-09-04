@@ -23,9 +23,12 @@
       list-style-type: none;
       margin: 0;
       padding: 0;
+      overflow: auto;
+      //height: 42px;
+      white-space: nowrap;
 
       li {
-        float: left;
+        display: inline-block;
 
         a {
           display: block;
