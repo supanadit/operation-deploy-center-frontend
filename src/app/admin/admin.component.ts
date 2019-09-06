@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
     {name: 'Repository', active: false, activeState: 'repository', url: 'repository'},
     // {name: 'Script', active: false, activeState: 'script', url: 'script'},
     {name: 'Operation', active: false, activeState: 'operation', url: 'operation'},
+    {name: 'History', active: false, activeState: 'deploy-history', url: 'deploy/history'},
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {
@@ -37,13 +38,17 @@ export class AdminComponent implements OnInit {
       });
     }
     const index: number = this.listMenu.findIndex((x: Menu) => x.active === true);
-    const currentActiveMenu: Menu = this.listMenu[index];
-    currentActiveMenu.active = false;
-    this.listMenu[index] = currentActiveMenu;
+    if (typeof index !== 'undefined') {
+      const currentActiveMenu: Menu = this.listMenu[index];
+      currentActiveMenu.active = false;
+      this.listMenu[index] = currentActiveMenu;
+    }
     const indexToActive: number = this.listMenu.findIndex((x: Menu) => x === menu);
-    const menuToActive: Menu = this.listMenu[indexToActive];
-    menuToActive.active = true;
-    this.listMenu[indexToActive] = menuToActive;
+    if (typeof indexToActive !== 'undefined') {
+      const menuToActive: Menu = this.listMenu[indexToActive];
+      menuToActive.active = true;
+      this.listMenu[indexToActive] = menuToActive;
+    }
   }
 }
 

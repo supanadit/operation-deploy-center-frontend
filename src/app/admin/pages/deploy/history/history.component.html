@@ -1,0 +1,29 @@
+<div class="container">
+  <br/>
+  <h3>
+    History
+  </h3>
+  <br/>
+</div>
+<div class="container">
+  <div class="panel" *ngFor="let x of listHistory">
+    <h4>{{ x.ssh.host }}</h4>
+    <table>
+      <tr>
+        <th>Git&nbsp;</th>
+        <td>:</td>
+        <td>{{ x.git.url }}</td>
+      </tr>
+      <tr>
+        <th>Target&nbsp;</th>
+        <td>:</td>
+        <td>{{ x.target }}</td>
+      </tr>
+      <tr>
+        <th>Target Compress&nbsp;</th>
+        <td>:</td>
+        <td>{{ x.targetCompress }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

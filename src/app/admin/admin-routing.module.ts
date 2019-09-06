@@ -48,6 +48,10 @@ const routes: Routes = [{
       }
     },
     {
+      path: 'deploy',
+      loadChildren: './pages/deploy/deploy.module#DeployModule'
+    },
+    {
       path: '',
       redirectTo: 'home',
       pathMatch: 'full',
