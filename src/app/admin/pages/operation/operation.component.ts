@@ -8,6 +8,8 @@ import { SSHResponse } from '../../../model/ssh.response';
 import { ServerService } from '../../../services/server.service';
 import { interval, Subscription } from 'rxjs';
 import { OperationService } from '../../../services/operation.service';
+import { DeployResponse } from '../../../model/deploy.response';
+import { DeployService } from '../../../services/deploy.service';
 
 declare var jQuery: any;
 
@@ -23,7 +25,9 @@ export class OperationComponent implements OnInit, OnDestroy {
   };
   listRepository: GitResponse[] = [];
   listServer: SSHResponse[] = [];
+  listHistory: DeployResponse[] = [];
 
+  selectedHistory: DeployResponse = null;
 
   listOperation: OperationResponse[] = [];
   currentOperation: OperationResponse = null;
@@ -55,8 +59,12 @@ export class OperationComponent implements OnInit, OnDestroy {
       value: 1
     },
     {
-      name: 'Deploy with Custom Script',
+      name: 'Custom Deploy',
       value: 2,
+    },
+    {
+      name: 'From History',
+      value: 3,
     }
   ];
 
@@ -65,6 +73,7 @@ export class OperationComponent implements OnInit, OnDestroy {
     private repositoryService: RepositoryService,
     private serverService: ServerService,
     private operationService: OperationService,
+    private deployService: DeployService,
   ) {
   }
 
@@ -93,6 +102,9 @@ export class OperationComponent implements OnInit, OnDestroy {
       if (!this.directoryListingFocus) {
         this.clearDirectoryListing();
       }
+    });
+    this.deployService.historyList().subscribe((data) => {
+      this.listHistory = data.data;
     });
   }
 
@@ -228,6 +240,18 @@ export class OperationComponent implements OnInit, OnDestroy {
     }, error => {
       console.log('Error', error);
     });
+  }
+
+  changeOperation() {
+    if (this.selectedOperationType !== 3) {
+      this.selectedHistory = null;
+    }
+    if (this.selectedOperationType !== 1 && this.selectedOperationType !== 2) {
+      this.selectedSSHOperation = null;
+      this.selectedRepositoryOperation = null;
+      this.directoryTarget = '/';
+      this.directoryCompress = '/';
+    }
   }
 
   confirmation() {

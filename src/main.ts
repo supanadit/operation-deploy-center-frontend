@@ -14,10 +14,8 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
 // tslint:disable-next-line:only-arrow-functions
-jQuery('document').ready(function() {
-  jQuery('body').niceScroll({
-    cursorcolor: '#3498db',
-    cursorwidth: '1px',
-    cursorborder: '1px solid #3498db',
-  });
+jQuery('body').niceScroll({
+  cursorcolor: '#3498db',
+  cursorwidth: '1px',
+  cursorborder: '1px solid #3498db',
 });

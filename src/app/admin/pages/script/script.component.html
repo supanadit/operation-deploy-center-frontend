@@ -1,1 +1,45 @@
-<p>script works!</p>
+<div class="container">
+  <br/>
+  <h3>
+    Script
+    <div style="float: right;">
+      <button class="btn btn-primary"
+              (click)="toggleEditorCreate()">{{ !isEditorCreate ? 'Create' : 'Cancel' }}</button>
+    </div>
+  </h3>
+  <br/>
+</div>
+<div class="container" *ngIf="!isEditorCreate">
+  <p align="center" *ngIf="listScript.length == 0">
+    No script exist
+    <br/>
+    Add new one
+  </p>
+  <div class="panel" *ngFor="let x of listScript" (click)="toggleEditorCreate(x)">
+    <h4>{{ x.name }}</h4>
+  </div>
+</div>
+<div class="container" *ngIf="isEditorCreate">
+  <div class="row">
+    <div class="col-md-12">
+      Script Name
+      <input type="text" class="form-control" [(ngModel)]="currentEditScript.name"/>
+    </div>
+  </div>
+  <br/>
+  List Command
+  <div *ngIf="currentEditScript.command.length != 0">
+    <div class="panel" *ngFor="let x of currentEditScript.command">
+      <input type="text" class="form-control" [(ngModel)]="x.command"/>
+      <hr/>
+      {{ x.description }}
+    </div>
+  </div>
+  <p align="center" *ngIf="currentEditScript.command.length == 0">
+    No command for this script
+    <br/>
+    Add new one
+  </p>
+  <br/>
+  <button class="btn btn-primary">Save</button>&nbsp;
+</div>

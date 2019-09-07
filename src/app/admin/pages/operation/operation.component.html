@@ -55,11 +55,12 @@
           <label>Select Operation</label>
           <ng-select placeholder="Select Operation" [items]="operationTypeList"
                      [(ngModel)]="selectedOperationType"
+                     (change)="changeOperation()"
                      bindLabel="name"
                      bindValue="value">
           </ng-select>
         </div>
-        <div *ngIf="selectedOperationType != null">
+        <div *ngIf="selectedOperationType != null && selectedOperationType != 3">
           <div class="form-group">
             <label>Select Repository</label>
             <ng-select placeholder="Select Repository" [items]="listRepository"
@@ -140,12 +141,26 @@
             </div>
           </div>
         </div>
+        <div *ngIf="selectedOperationType != null && selectedOperationType == 3">
+          <div class="form-group">
+            <label>Select History</label>
+            <ng-select placeholder="Select Operation"
+                       [items]="listHistory"
+                       [(ngModel)]="selectedHistory"
+                       bindLabel="ssh"
+                       bindValue="ssh">
+              <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
+                {{ item.ssh.host }}
+              </ng-template>
+            </ng-select>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         <button type="button"
                 class="btn btn-primary"
-                *ngIf="selectedOperationType != null&&selectedSSHOperation != null&&selectedRepositoryOperation != null&&directoryTarget != ''&&directoryCompress != ''"
+                *ngIf="(selectedOperationType != null&&selectedSSHOperation != null&&selectedRepositoryOperation != null&&directoryTarget != ''&&directoryCompress != '') || selectedHistory != null"
                 (click)="confirmation()">
           Start Operation
         </button>
