@@ -8,8 +8,10 @@ import { SSHResponse } from '../../../model/ssh.response';
 import { ServerService } from '../../../services/server.service';
 import { interval, Subscription } from 'rxjs';
 import { OperationService } from '../../../services/operation.service';
-import { DeployResponse } from '../../../model/deploy.response';
+import { DeployResponse, DeployResponseInterface } from '../../../model/deploy.response';
 import { DeployService } from '../../../services/deploy.service';
+import { ScriptService } from '../../../services/script.service';
+import { ScriptResponse } from '../../../model/script.response';
 
 declare var jQuery: any;
 
@@ -53,6 +55,10 @@ export class OperationComponent implements OnInit, OnDestroy {
   directoryListingErrorMessage = '';
   directoryListingFocus = false;
 
+  listScript: ScriptResponse[] = [];
+  localScript: ScriptResponse = null;
+  remoteScript: ScriptResponse = null;
+
   operationTypeList = [
     {
       name: 'Standard Deploy',
@@ -74,6 +80,7 @@ export class OperationComponent implements OnInit, OnDestroy {
     private serverService: ServerService,
     private operationService: OperationService,
     private deployService: DeployService,
+    private scriptService: ScriptService,
   ) {
   }
 
@@ -81,6 +88,7 @@ export class OperationComponent implements OnInit, OnDestroy {
     this.realtimeService.getOperation().subscribe((data: OperationResponse[]) => {
       this.loadGit();
       this.loadSSH();
+      this.loadScript();
       this.listOperation = [];
       this.listOperation = data;
       if (this.listOperation.length !== 0) {
@@ -133,6 +141,12 @@ export class OperationComponent implements OnInit, OnDestroy {
       if (response.isSuccess()) {
         this.listServer = response.data;
       }
+    });
+  }
+
+  loadScript() {
+    this.scriptService.scriptList().subscribe((data: DefaultResponse<ScriptResponse[]>) => {
+      this.listScript = data.data;
     });
   }
 
@@ -234,12 +248,41 @@ export class OperationComponent implements OnInit, OnDestroy {
   }
 
   startDeploy() {
-    // tslint:disable-next-line:max-line-length
-    this.operationService.standardDeploy(this.selectedRepositoryOperation, this.selectedSSHOperation, this.directoryTarget, this.directoryCompress).subscribe((data: any) => {
-      console.log('Success', data);
-    }, error => {
-      console.log('Error', error);
-    });
+    const deployResponse: DeployResponseInterface = {
+      ssh: {
+        host: this.selectedSSHOperation.host,
+      },
+      git: {
+        url: this.selectedRepositoryOperation.url,
+      },
+      target: this.directoryTarget,
+      targetCompress: this.directoryCompress,
+      scriptRemote: this.remoteScript,
+      scriptLocal: this.localScript,
+    };
+    if (this.selectedOperationType !== 3) {
+      // tslint:disable-next-line:max-line-length
+      if (this.selectedOperationType === 1) {
+        this.operationService.standardDeploy(deployResponse).subscribe((data: any) => {
+          console.log('Success', data);
+        }, error => {
+          console.log('Error', error);
+        });
+      } else {
+        this.operationService.scriptDeploy(deployResponse).subscribe((data: any) => {
+          console.log('Success', data);
+        }, error => {
+          console.log('Error', error);
+        });
+      }
+    }
+    if (this.selectedOperationType !== 1 && this.selectedOperationType !== 2) {
+      this.operationService.fromHistory(deployResponse).subscribe((data: any) => {
+        console.log('Success', data);
+      }, error => {
+        console.log('Error', error);
+      });
+    }
   }
 
   changeOperation() {

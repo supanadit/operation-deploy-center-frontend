@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-9">
         <div style="float:right">
-          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add">Add new operation</button>&nbsp;|&nbsp;
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add">Deploy</button>&nbsp;|&nbsp;
           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#repository">Repository</button>
         </div>
       </div>
@@ -48,7 +48,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addNewOperation">Add new Operation</h5>
+        <h5 class="modal-title" id="addNewOperation">Deploy</h5>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -98,22 +98,6 @@
                        bindLabel="host" (change)="serverChange()">
             </ng-select>
           </div>
-          <div class="form-group" *ngIf="selectedOperationType == 2">
-            <label>
-              Select Local Script&nbsp;
-              <span class="badge badge-secondary">OPTIONAL</span>
-            </label>
-            <ng-select placeholder="Select Local Script ( Optional )">
-            </ng-select>
-          </div>
-          <div class="form-group" *ngIf="selectedOperationType == 2">
-            <label>
-              Select Remote Script&nbsp;
-              <span class="badge badge-secondary">OPTIONAL</span>
-            </label>
-            <ng-select placeholder="Select Remote Script ( Optional )">
-            </ng-select>
-          </div>
           <div class="form-group" *ngIf="selectedSSHOperation != null"
                (mouseenter)="directoryListingFocus = true"
                (mouseleave)="directoryListingFocus = false">
@@ -140,6 +124,24 @@
               {{ directoryListingErrorMessage }}
             </div>
           </div>
+          <div class="form-group" *ngIf="selectedOperationType == 2">
+            <label>
+              Select Local Script&nbsp;
+              <span class="badge badge-secondary">OPTIONAL</span>
+            </label>
+            <ng-select placeholder="Select Local Script ( Optional )" [items]="listScript" bindLabel="name"
+                       [(ngModel)]="localScript">
+            </ng-select>
+          </div>
+          <div class="form-group" *ngIf="selectedOperationType == 2">
+            <label>
+              Select Remote Script&nbsp;
+              <span class="badge badge-secondary">OPTIONAL</span>
+            </label>
+            <ng-select placeholder="Select Remote Script ( Optional )" [items]="listScript" bindLabel="name"
+                       [(ngModel)]="remoteScript">
+            </ng-select>
+          </div>
         </div>
         <div *ngIf="selectedOperationType != null && selectedOperationType == 3">
           <div class="form-group">
@@ -147,12 +149,31 @@
             <ng-select placeholder="Select Operation"
                        [items]="listHistory"
                        [(ngModel)]="selectedHistory"
-                       bindLabel="ssh"
-                       bindValue="ssh">
+                       bindLabel="ssh">
               <ng-template ng-option-tmp ng-label-tmp let-item="item" let-index="index" let-search="searchTerm">
                 {{ item.ssh.host }}
               </ng-template>
             </ng-select>
+          </div>
+          <div *ngIf="selectedHistory != null">
+            <table>
+              <tr>
+                <th>Host</th>
+                <td>{{ selectedHistory.ssh.host }}</td>
+              </tr>
+              <tr>
+                <th>Target Folder</th>
+                <td>{{ selectedHistory.target }}</td>
+              </tr>
+              <tr>
+                <th>Repository</th>
+                <td>{{ selectedHistory.git.url }}</td>
+              </tr>
+              <tr>
+                <th>Target Compress</th>
+                <td>{{ selectedHistory.targetCompress }}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
