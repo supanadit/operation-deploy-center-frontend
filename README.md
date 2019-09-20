@@ -1,4 +1,4 @@
-![Operation X Logo](https://i.ibb.co/RgkTNFj/Operation-X-Logo.png)
+![Operation X Logo](http://supanadit.com/wp-content/uploads/2019/09/Operation-X-Logo.png)
 
 More than Continuous Integration, the purpose of this software is to deploy your source code easily,
 Auto Scheduling, Notification, GUI Ready, Scripts Support
