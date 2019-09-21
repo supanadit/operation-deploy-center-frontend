@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ServerComponent } from './pages/server/server.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
-import { ScriptComponent } from './pages/script/script.component';
+import { CodeEditor, ScriptComponent } from './pages/script/script.component';
 import { OperationComponent } from './pages/operation/operation.component';
 import { ServerService } from '../services/server.service';
 import { HttpClient } from '@angular/common/http';
@@ -33,6 +33,7 @@ const config: SocketIoConfig = {
     RepositoryComponent,
     ScriptComponent,
     OperationComponent,
+    CodeEditor,
   ],
   imports: [
     CommonModule,

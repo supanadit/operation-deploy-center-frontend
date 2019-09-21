@@ -18,8 +18,9 @@
   <div class="panel" *ngFor="let x of listScript" (click)="toggleEditorCreate(x)">
     <h4>{{ x.name }}</h4>
     <hr/>
-    <div *ngFor="let y of x.command">
-      <b>> {{ y.command }}</b><br/>
+    <div>
+      <b>Description</b><br/>
+      {{ (x.description !== "" && x.description !== null) ? x.description : "No Description for this scripts" }}
     </div>
   </div>
 </div>
@@ -31,19 +32,14 @@
     </div>
   </div>
   <br/>
-  List Command
-  <div *ngIf="currentEditScript.command.length != 0">
-    <div class="panel" *ngFor="let x of currentEditScript.command">
-      <input type="text" class="form-control" [(ngModel)]="x.command"/>
-      <hr/>
-      {{ x.description }}
+  <div class="row">
+    <div class="col-md-12">
+      Description
+      <textarea class="form-control" [(ngModel)]="currentEditScript.description"></textarea>
     </div>
   </div>
-  <p align="center" *ngIf="currentEditScript.command.length == 0">
-    No command for this script
-    <br/>
-    Add new one
-  </p>
+  <br/>
+  <textarea #code>{{currentEditScript.command | CodeEditor }}</textarea>
   <br/>
   <button class="btn btn-primary">Save</button>&nbsp;
 </div>
