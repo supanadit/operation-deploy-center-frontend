@@ -1,14 +1,7 @@
-![Operation X Logo](http://supanadit.com/wp-content/uploads/2019/09/Operation-X-Logo.png)
+![Operation X Logo](http://supanadit.com/wp-content/uploads/2019/11/Opeartion-X.png)
 
 More than Continuous Integration, the purpose of this software is to deploy your source code easily,
 Auto Scheduling, Notification, GUI Ready, Scripts Support
-
-## Home Page
-![Show Case](http://supanadit.com/wp-content/uploads/2019/09/operation-x.png)
-
-## Operation Page
-![Show Case](http://supanadit.com/wp-content/uploads/2019/09/operation-in-operation-x.png)
-
 
 ## How to Setup
 1. Clone this repository and make sure `Node JS` have been installed on your device
