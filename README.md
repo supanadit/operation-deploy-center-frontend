@@ -15,7 +15,7 @@ Auto Scheduling, Notification, GUI Ready, Scripts Support
 3. Create new Scripts
 4. Edit Scripts
 
-## Feature ready to use
+## Feature
 1. Save Server Credential
 2. Adding Repository
 3. Clone Repository
