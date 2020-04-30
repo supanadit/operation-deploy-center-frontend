@@ -23,7 +23,7 @@
     "bootstrap": "^4.3.1",
     "codemirror": "^5.49.0",
     "jbox": "^1.0.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery.nicescroll": "^3.7.6",
     "ngx-socket-io": "^3.0.1",
     "rxjs": "~6.4.0",
